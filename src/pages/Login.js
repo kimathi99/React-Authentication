@@ -46,7 +46,7 @@ function Login() {
           setUser(jwt_decode(data.access));
           localStorage.setItem('authTokens', JSON.stringify(data));
           alert("login was sucessfull !!"); 
-          navigate('/', {replace: true});;
+          navigate('/', {replace: true});
         });
       } else {
         return response.json();

@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-
+import React, {useContext, useState } from 'react';
+import { AuthContext } from '../auth/auth';
+import { useNavigate } from 'react-router-dom';
+  
 const Register = () => {
+  let {setregemail}=useContext(AuthContext)
   const [formData, setFormData] = useState({
     email: '',
     username: '',
@@ -8,8 +11,10 @@ const Register = () => {
     password: '',
     confirmPassword: ''
   });
+  const navigate =useNavigate();
 
   const [errors, setErrors] = useState({});
+  const [success, setsuccess] = useState({})
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -39,7 +44,17 @@ const Register = () => {
             setErrors(data);
             throw new Error('Bad Request');
           });
-        } else {
+        } else if(response.status === 200){
+          return response.json().then(data => {
+            setsuccess(data);
+            setregemail(formData.email);
+            localStorage.setItem('regmail', JSON.stringify(formData.email));
+            alert("operation sucess"); 
+            navigate('/verify', {replace: true});
+          });          
+          
+        }
+        else {
           return response.json();
         }
       })
@@ -50,6 +65,7 @@ const Register = () => {
   return (
     <div>
       <h1>Registration</h1>
+      {success && <div className="success">{success.sucess}</div>}
       <form onSubmit={handleSubmit}>
         <label>
           Email:

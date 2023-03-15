@@ -2,7 +2,7 @@ import React from 'react'
 
 function NoMatch() {
   return (
-    <div>NoMatch</div>
+    <div> you are not required to see this page</div>
   )
 }
 
