@@ -1,71 +1,99 @@
-import React, { useState } from 'react';
+import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
-const ResetPassword = (props) => {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (event) => {
+function ResetPassword() {
+  const [errors, setErrors] = useState({});
+  const [success, setsuccess] = useState({});
+  const [formData, setFormData] = useState({    
+    password: '',
+    token:'',
+    uid64:''
+  });
+  const [confirmPassword, setconfirmPassword] = useState('')
+
+
+ 
+
+  const navigate =useNavigate();
+
+  
+
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = event => {
     event.preventDefault();
-
-    if (password !== confirmPassword) {
-      setErrorMessage('Passwords do not match.');
+    if (formData.password !== confirmPassword) {
+      setErrors('Passwords do not match');
       return;
     }
-
-    const { uid, token } = props.match.params;
-    
-
-    fetch(`http://example.com/reset_password/${uid}/${token}/`, {
+    setErrors({});    
+    const requestOptions = {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        password,
-        token,
-        uidb64,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('An error occurred while resetting the password.');
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    };
+    fetch('http://127.0.0.1:8000/api/reset_password/', requestOptions)
+
+      .then(response => {
+        if (response.status === 400) {
+          return response.json().then(data => {
+            setErrors(data);
+            throw new Error('Bad Request');
+          });
+        } else if(response.status === 200){
+          return response.json().then(data => {
+            setsuccess(data);
+            sleep(3000)
+            alert("operation sucess"); 
+            navigate('/logout', {replace: true});
+          });          
+          
         }
-        // Redirect the user to the login page or display a success message.
+        else {
+          return response.json();
+        }
       })
-      .catch((error) => {
-        console.log(error);
-        setErrorMessage(error.message);
-      });
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
   };
 
   return (
+    
     <div>
       <h1>Reset Password</h1>
-      {errorMessage && <div>{errorMessage}</div>}
+      {success.email && success.email.map(<div>{success.email}</div>)}
+      {errors.email && errors.email.map(<div>{errors.email}</div>)}
+      {errors && <div>{errors}</div>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="password">New Password:</label>
           <input
             type="password"
-            id="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
           />
         </div>
         <div>
           <label htmlFor="confirm-password">Confirm Password:</label>
           <input
             type="password"
-            id="confirm-password"
+            name="confirm-password"
             value={confirmPassword}
-            onChange={(event) => setConfirmPassword(event.target.value)}
+            onChange={e=>setconfirmPassword(e.target)}
           />
         </div>
         <button type="submit">Reset Password</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default ResetPassword;
+export default ResetPassword

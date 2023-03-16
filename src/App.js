@@ -13,6 +13,7 @@ import Activate from './pages/Activate';
 import LogoutButton from './components/logout';
 import Otp from './pages/otp';
 import RequireAuth from './auth/requireAuth';
+import ForgotPassword from './pages/forgotpassword';
 function App() {
   return (
     <BrowserRouter>
@@ -27,6 +28,7 @@ function App() {
             <Route path='/verify/account' element={<Activate/>}/> 
             <Route path='/register' element={<Register/>}/>
             <Route path='/verify' element={<Otp/>}/>
+            <Route path='/forgotPassword' element={<ForgotPassword/>}/>
             <Route path='/businessregistration' element={<RequireAuth><BusinessRegistration/></RequireAuth>}/>
 
             <Route path='*' element={<NoMatch/>}/>

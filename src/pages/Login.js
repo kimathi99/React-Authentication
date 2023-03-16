@@ -1,5 +1,5 @@
 import React, { useContext,useState  } from 'react';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 
 // The issue is that you are trying to use setAuthTokens and setUser directly
@@ -75,6 +75,8 @@ function Login() {
             </label>
             <br />
             <button type="submit">Login</button>
+            <br/>
+            <Link  to='/forgotPassword'>forgot password ?</Link>
           </form>
        </div>
     
