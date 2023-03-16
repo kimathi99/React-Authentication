@@ -36,7 +36,7 @@ function Otp() {
         return response.json().then(data => {
           
           alert("Your Account is active !!"); 
-          setregmail('');
+          localStorage.removeItem('regemail');
           navigate('/login', {replace: true});;
         });
       } else {
@@ -51,10 +51,10 @@ function Otp() {
         <h1>ACTIVATE ACCOUNT</h1>
         <form onSubmit={handleSubmit}>
             <label>
-              OTP:
-                      
+              OTP:                      
               <input type="text" name="code" value={formData.code} onChange={handleInputChange} />
-              {errors.code&& <div className="error">{errors.code[0]}</div>}
+              {errors.code&& <div className="error">{errors.code}</div>}
+              {errors.email&& <div className="error">Registration email :{errors.email}</div>}
             </label>
             <br />
             <button type="submit">Verify</button>

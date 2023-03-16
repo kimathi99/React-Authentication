@@ -48,7 +48,7 @@ const Register = () => {
           return response.json().then(data => {
             setsuccess(data);
             setregemail(formData.email);
-            localStorage.setItem('regmail', JSON.stringify(formData.email));
+            localStorage.setItem('regemail', JSON.stringify(formData.email));
             alert("operation sucess"); 
             navigate('/verify', {replace: true});
           });          
