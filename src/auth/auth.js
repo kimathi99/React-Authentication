@@ -19,6 +19,7 @@ const AuthProvider = ({children}) => {
         setAuthTokens(null)
         setUser(null)
         localStorage.removeItem('authTokens')
+        localStorage.removeItem('regemail')
         alert("Logged out sucessfully!!")
         navigate('/', {replace: true});
     }
