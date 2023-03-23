@@ -29,7 +29,7 @@ const Profile = () => {
     setIsValid(null);
    
     const requestOptions = {
-      method: 'POST',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authTokens.access}` },
       body: JSON.stringify(profileData)
     };

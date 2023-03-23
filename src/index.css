@@ -5,6 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+ 
+  
+}
+main{
+  margin-top: 10px;
+  box-shadow: 10px 10px 20px 0px grey
+  
 }
 
 div .App  {
@@ -16,14 +23,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-nav{
-  background-color: aliceblue;
+nav.main{
+  background-color: rgb(47, 226, 80);
   padding: 16px  32px ;
 }
 
 .primary-nav{
-  background-color: white;
+  background-color: rgb(98, 212, 22);
   padding: 16px  32px ;
+
 } 
 
 nav a {
@@ -35,11 +43,25 @@ div .error {
   background-color: rgb(236, 183, 183);
 }
 div .success {
-  background-color: rgb(77, 187, 26);
+  background-color: green;
 }
+div  div nav .MuiTypography-root{
+  background-color: rgb(145, 33, 33);
+}
+
+header div .css-i9gxme{
+  background-color: rgb(194, 84, 84);
+  margin-left: 300px;
+}  
+header div .css-i9gxme{
+  background-color: rgb(255, 255, 255);
+  margin-left: 300px;
+}  
+
 /*
 nav a.active{
   font-weight: bold;
   text-decoration: none;
 }
+the profile and the dshaboard 
 */

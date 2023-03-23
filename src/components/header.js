@@ -9,12 +9,12 @@ export const Navbar= ()=>{
     const NavLinkStyles =({isActive})=>{
         return{
             fontWeight: isActive? 'bold':'normal',
-            textDecoration: isActive? 'none': 'underline',
+            textDecoration: 'none',
         }
     }
    
     return(
-        <nav>
+        <nav  className='main'>
             <NavLink style={NavLinkStyles} to='/'>Home</NavLink>
             <NavLink  style={NavLinkStyles} to ='/products'>Products</NavLink>
             
